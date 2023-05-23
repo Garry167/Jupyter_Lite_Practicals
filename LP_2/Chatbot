@@ -1,0 +1,27 @@
+# Dictionary of predefined responses
+responses = {
+    "greetings": ["Hello!", "Hi there!", "Welcome! How can I assist you?"],
+    "goodbye": ["Goodbye!", "Have a nice day!", "See you later!"],
+    "default": ["I'm sorry, I didn't understand. Can you please rephrase?", "Apologies, I couldn't catch that. Could you please try again?"]
+}
+
+# Function to generate response based on user input
+def get_response(user_input):
+    if user_input.lower() in ["hello", "hi", "hey"]:
+        return responses["greetings"][0]
+    elif user_input.lower() in ["bye", "goodbye"]:
+        return responses["goodbye"][0]
+    else:
+        return responses["default"][0]
+
+# Main interaction loop
+print("Bot: Hello! How can I assist you today?")
+
+while True:
+    user_input = input("User: ")
+    response = get_response(user_input)
+    print("Bot:", response)
+
+    # Exit loop if user says goodbye
+    if response in responses["goodbye"]:
+        break
