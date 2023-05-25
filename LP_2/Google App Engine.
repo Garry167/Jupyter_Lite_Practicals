@@ -1,0 +1,6 @@
+download googlecloudsdk -> download sdk
+Google Cloud: Cloud Computing Services -> go to this site and select console
+create new project under the droplist
+In the search bar search for "app engine"
+after downloading google cloud sdk -> open it -> Initialise your SDK by gcloud init
+then configure
