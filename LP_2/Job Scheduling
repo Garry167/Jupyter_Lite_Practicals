@@ -1,0 +1,27 @@
+# Define a list of jobs and their corresponding durations
+jobs = [("Job1", 5), ("Job2", 3), ("Job3", 8), ("Job4", 2)]
+
+# Sort the jobs based on their durations in ascending order
+# By providing lambda x: x[1] as the key, the sorted() function sorts the jobs list based on the durations (i.e., the second element of each job tuple). The sorting is done in ascending order by default.
+
+sorted_jobs = sorted(jobs, key=lambda x: x[1])
+
+# Initialize an empty schedule
+schedule = []
+
+# Iterate through the sorted jobs
+for job in sorted_jobs:
+    # Find the resource with the earliest completion time
+    earliest_resource = min(schedule, key=lambda x: x[1]) if schedule else None
+    
+    if earliest_resource:
+        # Assign the job to the resource with the earliest completion time
+        schedule.append((job[0], earliest_resource[1] + job[1]))
+    else:
+        # If no resources are available, assign the job to a new resource
+        schedule.append((job[0], job[1]))
+
+# Print the final schedule
+print("Job Schedule:")
+for job in schedule:
+    print(f"Job: {job[0]}, Completion Time: {job[1]}")
