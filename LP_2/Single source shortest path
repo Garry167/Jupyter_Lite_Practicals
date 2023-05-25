@@ -1,4 +1,5 @@
 import sys
+#sys.maxsize represents the largest positive integer that can be used as an index for data structures or as a value to indicate infinity. 
 
 def dijkstra(graph, start_vertex):
     num_vertices = len(graph)
