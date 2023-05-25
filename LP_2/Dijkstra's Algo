@@ -1,0 +1,47 @@
+import sys
+#import sys statement is used to access the sys.maxsize attribute. sys.maxsize represents the largest positive integer that can be used as a valid distance value to initialize the distances dictionary.
+def dijkstra(graph, source):
+    # Initialize distances to infinity for all vertices except the source
+    distances = {vertex: sys.maxsize for vertex in graph}
+    distances[source] = 0
+
+    # Initialize an empty set to store visited vertices
+    visited = set()
+
+    # Loop through all vertices
+    while len(visited) < len(graph):
+        # Find the vertex with the minimum distance from the source among the unvisited vertices
+        min_distance = sys.maxsize
+        min_vertex = None
+        for vertex in graph:
+            if vertex not in visited and distances[vertex] < min_distance:
+                min_distance = distances[vertex]
+                min_vertex = vertex
+
+        # Add the minimum distance vertex to the visited set
+        visited.add(min_vertex)
+
+        # Update distances for adjacent vertices
+        for neighbor in graph[min_vertex]:
+            # Calculate the distance from the source to the neighbor through the current vertex
+            distance = distances[min_vertex] + graph[min_vertex][neighbor]
+            # If the calculated distance is smaller than the previously recorded distance, update it
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+
+    return distances
+
+# Example usage
+graph = {
+    'A': {'B': 2, 'C': 4},
+    'B': {'C': 1, 'D': 3},
+    'C': {'D': 1},
+    'D': {}
+}
+
+source = 'A'
+distances = dijkstra(graph, source)
+
+# Print the shortest distances from the source to all other vertices
+for vertex, distance in distances.items():
+    print(f"Shortest distance from {source} to {vertex}: {distance}")
