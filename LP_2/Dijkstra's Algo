@@ -45,3 +45,6 @@ distances = dijkstra(graph, source)
 # Print the shortest distances from the source to all other vertices
 for vertex, distance in distances.items():
     print(f"Shortest distance from {source} to {vertex}: {distance}")
+
+
+#O((V+E)log V)
