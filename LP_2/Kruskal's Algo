@@ -1,0 +1,60 @@
+#Kruskal's algo
+class UnionFind:
+    def __init__(self, vertices):
+        self.parent = {v: v for v in vertices}
+        self.rank = {v: 0 for v in vertices}
+
+    def find(self, v):
+        if self.parent[v] != v:
+            self.parent[v] = self.find(self.parent[v])
+        return self.parent[v]
+
+    def union(self, v1, v2):
+        root1 = self.find(v1)
+        root2 = self.find(v2)
+
+        if root1 != root2:
+            if self.rank[root1] < self.rank[root2]:
+                self.parent[root1] = root2
+            elif self.rank[root1] > self.rank[root2]:
+                self.parent[root2] = root1
+            else:
+                self.parent[root1] = root2
+                self.rank[root2] += 1
+
+
+def kruskal(graph):
+    edges = []
+    for u in graph:
+        for v, weight in graph[u]:
+            edges.append((weight, u, v))
+
+    edges.sort()  # Sort edges by weight in ascending order
+    mst = []
+    vertices = set(graph.keys())
+    uf = UnionFind(vertices)
+
+    for weight, u, v in edges:
+        if uf.find(u) != uf.find(v):
+            uf.union(u, v)
+            mst.append((u, v, weight))
+
+    return mst
+
+
+# Example usage
+graph = {
+    'A': [('B', 2), ('D', 6)],
+    'B': [('A', 2), ('C', 3), ('D', 8)],
+    'C': [('B', 3), ('D', 5)],
+    'D': [('A', 6), ('B', 8), ('C', 5)]
+}
+
+mst = kruskal(graph)
+
+# Print the Minimal Spanning Tree
+for u, v, weight in mst:
+    print(f"{u} -- {v} : {weight}")
+
+#Union find data structure:-It provides efficient operations to determine whether two elements belong to the same subset and to merge two subsets together.
+#O(E logE) or O(V logV) 
