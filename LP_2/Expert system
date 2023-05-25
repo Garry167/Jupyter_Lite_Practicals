@@ -1,0 +1,53 @@
+class InformationManagementExpert:
+    #constructor
+    def __init__(self):
+        self.database = {}
+
+    def add_information(self, category, data):
+        if category not in self.database:
+            self.database[category] = []
+        self.database[category].append(data)
+
+    def search_information(self, category):
+        if category in self.database:
+            return self.database[category]
+        else:
+            return []
+
+    def remove_information(self, category, data):
+        if category in self.database:
+            if data in self.database[category]:
+                self.database[category].remove(data)
+                if len(self.database[category]) == 0:
+                    del self.database[category]
+                return True
+        return False
+
+
+# Example usage
+expert_system = InformationManagementExpert()
+
+# Add information
+expert_system.add_information('Books', 'Harry Potter')
+expert_system.add_information('Books', 'To Kill a Mockingbird')
+expert_system.add_information('Movies', 'The Shawshank Redemption')
+expert_system.add_information('Movies', 'Pulp Fiction')
+
+# Search information
+books = expert_system.search_information('Books')
+print("Books:", books)
+
+movies = expert_system.search_information('Movies')
+print("Movies:", movies)
+
+# Remove information
+removed = expert_system.remove_information('Books', 'Harry Potter')
+if removed:
+    print("Information removed successfully.")
+else:
+    print("Information not found.")
+
+books = expert_system.search_information('Books')
+print("Updated Books:", books)
+
+#Linear time complexity in worst case-> O(n)
