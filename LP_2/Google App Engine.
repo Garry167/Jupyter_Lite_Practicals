@@ -8,3 +8,4 @@ then configure
 
 aws-> jaikrushnabinnar11@gmail.com
 JaikrushnaBB@321
+After login -> go to EC2 -> Launch Instance -> add name, add key pair name -> Launch instance
